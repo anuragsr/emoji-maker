@@ -1,0 +1,122 @@
+<nav class="navbar navbar-dark bg-dark fixed-top">
+  <span class="navbar-brand mb-0 h1">Emoji Builder v1.0</span>
+</nav>
+<div class="container-fluid h-100 noselect ctn">
+  <div class="row h-100">
+    <div class="col-md-7 left-pane">
+      <div class="mb-4">
+        <h4>Face</h4><hr/>
+        <img class="mr-4 mb-4" ng-repeat="c in assets.face track by $index" height="100" ng-src="{{c.url}}" ng-click="addComponent(c, 'face')"/>
+      </div>
+      <div class="mb-4">
+        <h4>Eyes</h4><hr/>
+        <img class="mr-4 mb-4" ng-repeat="c in assets.eyes track by $index" height="100" ng-src="{{c.url}}" ng-click="addComponent(c, 'eyes')"/>
+      </div>
+      <div class="mb-4">
+        <h4>Mouth</h4><hr/>      
+        <img class="mr-4 mb-4" ng-repeat="c in assets.mouth track by $index" height="100" ng-src="{{c.url}}" ng-click="addComponent(c, 'mouth')"/>
+      </div>
+    </div>
+    <div class="col-md-5">
+      <div class="mb-4">
+        <h4>Preview</h4><hr/>
+        <div class="ctn-preview mb-3">
+          <div class="base" style="background: url({{config.face.url}}) no-repeat center; background-size: cover;">
+            <div ng-show="config.eye1 != '' && config.eye1.show" class="eye1">
+              <div class="component eyes eye-L" style="background: url({{config.eye1.L.url}}) no-repeat center; background-size: 100% 100%; left: 80px; top: 50px;"></div>
+              <div class="component eyes eye-B" style="background: url({{config.eye1.url}}) no-repeat center; background-size: 100% 100%; left: 80px; top: 50px;"></div>
+              <div class="component eyes eye-R" style="background: url({{config.eye1.R.url}}) no-repeat center; background-size: 100% 100%; left: 200px; top: 50px;"></div>
+            </div>
+
+            <div ng-show="config.eye2 != '' && config.eye2.show" class="eye2">
+              <div class="component eyes eye-L" style="background: url({{config.eye2.L.url}}) no-repeat center; background-size: 100% 100%; left: 80px; top: 50px;"></div>
+              <div class="component eyes eye-B" style="background: url({{config.eye2.url}}) no-repeat center; background-size: 100% 100%; left: 80px; top: 50px;"></div>
+              <div class="component eyes eye-R" style="background: url({{config.eye2.R.url}}) no-repeat center; background-size: 100% 100%; left: 200px; top: 50px;"></div>
+            </div>
+            
+            <div ng-show="config.mouth != ''" class="component mouth" style="background: url({{config.mouth.url}}) no-repeat center; background-size: 100% 100%; left: 100px; top: 200px;">
+            </div>
+          </div>
+        </div>
+        <div class="text-center">
+          <button class="btn btn-info" ng-click="downloadImage()">
+            <i class="fa fa-download"></i>&nbsp;&nbsp;Download Emoji
+          </button>
+          <button class="btn btn-success" ng-click="openModal('export')">
+            <i class="fa fa-chevron-circle-down"></i>&nbsp;&nbsp;Export JSON
+          </button>
+          <button class="btn btn-light" ng-click="openModal('import')">
+            <i class="fa fa-chevron-circle-up"></i>&nbsp;&nbsp;Import JSON
+          </button>
+        </div>
+      </div>
+      <div>
+        <h4>Components</h4><hr/>
+        <div class="comp-info">
+          <b>Face :</b> {{config.face.name}}
+          <img ng-src="{{config.face.url}}" height="30" />
+          <div class="pull-right">
+          </div>
+        </div>
+        <div class="comp-info" ng-show="config.eye1 != '' && config.eye1.show">
+          <b>Eye :</b> {{config.eye1.name}}
+          <img ng-src="{{config.eye1.url}}" height="30" />
+          <div class="pull-right">
+            <div class="btn-group" role="group">
+              <button type="button" class="btn btn-light" ng-class="{'active': config.eye1.type == 'L'}" ng-click="toggleEye(config.eye1, 'L', '.eye1')">Left</button>
+              <button type="button" class="btn btn-light" ng-class="{'active': config.eye1.type == 'B'}" ng-click="toggleEye(config.eye1, 'B', '.eye1')">Both</button>
+              <button type="button" class="btn btn-light" ng-class="{'active': config.eye1.type == 'R'}" ng-click="toggleEye(config.eye1, 'R', '.eye1')">Right</button>
+            </div>
+            <button class="btn btn-sm btn-danger" ng-click="removeComponent('eyes', 'eye1')">Remove</button>
+          </div>
+        </div>
+        <div class="comp-info" ng-show="config.eye2 != '' && config.eye2.show">
+          <b>Eye :</b> {{config.eye2.name}}
+          <img ng-src="{{config.eye2.url}}" height="30" />
+          <div class="pull-right">
+            <div class="btn-group" role="group">
+              <button type="button" class="btn btn-light" ng-class="{'active': config.eye2.type == 'L'}" ng-click="toggleEye(config.eye2, 'L', '.eye2')">Left</button>
+              <button type="button" class="btn btn-light" ng-class="{'active': config.eye2.type == 'B'}" ng-click="toggleEye(config.eye2, 'B', '.eye2')">Both</button>
+              <button type="button" class="btn btn-light" ng-class="{'active': config.eye2.type == 'R'}" ng-click="toggleEye(config.eye2, 'R', '.eye2')">Right</button>
+            </div>
+            <button class="btn btn-sm btn-danger" ng-click="removeComponent('eyes', 'eye2')">Remove</button>
+          </div>
+        </div>
+        <div class="comp-info" ng-show="config.mouth != ''">
+          <b>Mouth :</b> {{config.mouth.name}}
+          <img ng-src="{{config.mouth.url}}" height="30" />
+          <div class="pull-right">
+            <button class="btn btn-sm btn-danger" ng-click="removeComponent('mouth')">Remove</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="jsonModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" ng-show="opts.modal == 'export'" id="exampleModalLabel">Export JSON</h5>
+        <h5 class="modal-title" ng-show="opts.modal == 'import'" id="exampleModalLabel">Import JSON</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div ng-show="opts.modal == 'export'">
+          You may copy the JSON below and save it.
+        </div>
+        <div ng-show="opts.modal == 'import'">
+          Paste the JSON below and click on the import button
+        </div>
+        <textarea class="form-control my-4" placeholder="Enter JSON here" ng-model="jsonStr"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+        <button type="button" ng-disabled="jsonStr.length == 0" ng-show="opts.modal == 'import'" class="btn btn-info" ng-click="importJSON()">Import</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,81 @@
+/* Common to all*/
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+html, body, div[ui-view]{
+	height: 100%;
+	width: 100%;
+}
+
+.ctn{
+	padding-top: 4.5rem;
+}
+
+hr{
+	border-color: rgba(0,0,0,.6);
+}
+
+.left-pane{
+	overflow-y: scroll;
+	height: 95%;
+}
+
+.left-pane img:hover{
+	cursor: pointer;
+	outline: 2px solid black;
+	background: rgba(0,0,0,0.2);
+}
+
+.ctn-preview{
+	height: 400px;
+	background: rgba(128,128,128,.1);
+}
+
+.base{
+	margin: 0 auto;
+	position: relative;
+	height: 400px;
+	width: 400px;
+}
+
+.component{
+	position: absolute;
+	height: 100px;
+	width: 220px;
+	outline: 2px solid transparent;
+}
+
+.component.eyes{
+	width: 110px;	
+}
+
+.component.eye-B{
+	width: 220px;	
+}
+
+.ft-controls{
+	opacity: 0;
+}
+
+.comp-info{
+	margin-bottom: .5rem;
+	padding: 1rem;
+	background: rgba(128,128,128,.1);
+	font-size: 1.25rem;
+}
+
+.modal-dialog{
+	width: 700px;
+	max-width: 700px;
+}
+
+.modal textarea{
+	height: 250px;
+}
